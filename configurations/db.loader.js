@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const config = require('./config');
-const mongoURI = 'mongodb://localhost:27017/ulteratech'
+const mongoURI = 'mongodb://localhost:27017/ulteratech_test3'
 // const mongoURI = 'mongodb://' + config.db.user + ':' + encodeURIComponent(config.db.password) + '@' + config.db.host + '/' + config.db.database
 // const UrlDB = 'mongodb://admin:'+encodeURIComponent('gsbitlabs@123')+'@65.0.105.97/practice'
 mongoose.connect(mongoURI, { useCreateIndex: true, useFindAndModify: true, useNewUrlParser: true, useUnifiedTopology: true })

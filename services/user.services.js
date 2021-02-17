@@ -21,8 +21,10 @@ class UserController {
     signup(body) {
         return new Promise(async (resolve, reject) => {
             try {
+                console.log('body',body);
                 const model = new user(body);
                 const newUser = await dbService.save(model).catch(err => {
+                    console.log(err)
                     reject(err);
                 });
                 resolve(newUser);
@@ -48,8 +50,8 @@ class UserController {
             try {
                 console.log(data);
                 const token = jwt.sign({
-                    email: data.email,
                     userId: data._id,
+                    phonenumber: data.phonenumber,
                 }, config.jwtSecret, { expiresIn: '1h' })
                 resolve(token);
             } catch (err) {

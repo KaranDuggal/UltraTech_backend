@@ -7,18 +7,16 @@ const validatorService = new ValidatorService()
 module.exports = UserController = function () {
     this.user_signup = async (req, res) => {
         try {
-            // let existingUser = await userService.check_email_exist(req.body.email);
-            // if (existingUser === true) { throw { custom_err_message: "User Already Exists" } }
             const validate = await validatorService.schemas.signupSchema.validate(req.body)
             if (validate.error) { throw { custom_err_message: "error in validatorService.schemas.signupSchema", error: validate.error.details } }
 
             let hashedPassword = await bcrypt.hash(validate.value.password, 10);
-            validate.value.password = hashedPassword;
-            const user = await userService.signup(validate.value);
+            req.body.password = hashedPassword;
+            const user = await userService.signup(req.body);
             const token = await userService.createUserToken(user);
             return res.status(200).json({ success: true, message: `created successfully.`, data: user,Token: token});
         } catch (err) {
-            if(err.code===11000){  err = "This email Allready Exist"}
+            // if(err.code===11000){  err = "This email Allready Exist"}
             return res.status(400).json({ success: false, error: err, message: err.custom_err_message ? err.custom_err_message : "Could not Signup" });
         }
     }
