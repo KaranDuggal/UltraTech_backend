@@ -33,13 +33,13 @@ class UserController {
             }
         })
     }
-    check_email_exist_send_Data(email) {
+    check_phoneno_exist_send_Data(phoneNo) {
         return new Promise(async (resolve, reject) => {
             try {
-                const emailexist = await dbService.findOne(user, { email: email }).catch(err => {
+                const phoneexist = await dbService.findOne(user, { phonenumber: phoneNo }).catch(err => {
                     throw err
                 })
-                resolve((emailexist && emailexist !== null) ? emailexist : false)
+                resolve((phoneexist && phoneexist !== null) ? phoneexist : false)
             } catch (err) {
                 reject(err)
             }

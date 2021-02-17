@@ -23,15 +23,11 @@ module.exports = UserController = function () {
 
     this.user_login = async (req, res) => {
         try {
-            // ==================================Nodemailer======================================
-            // await nodemailer.sendmail()
-            // ==================================================================================
             const validate = await validatorService.schemas.loginScema.validate(req.body);
             // ==================================================================================
-            let User = await userService.check_email_exist_send_Data(req.body.email);
-            console.log('User', User)
+            let PhoneNo = await userService.check_phoneno_exist_send_Data(req.body.phonenumber);
             // ==================================================================================
-            const password = await bcrypt.compare(req.body.password, User.password)
+            const password = await bcrypt.compare(req.body.password, PhoneNo.password)
             if (password === false) { throw { custom_err_message: "wrong password" } }
             // ==================================================================================
             const token = await userService.createUserToken(User);
