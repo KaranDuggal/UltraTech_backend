@@ -68,14 +68,19 @@ class ProductService {
                         cb(null, Date.now() + '-' + file.originalname + path.extname(file.originalname))//Date.now() + '-' + file.originalname + path.extname(file.originalname)
                     }
                 })
-                var upload = multer({ storage: storage }).array('image');
+                var upload = multer({ storage: storage }).array('images');
                 upload(req, res, async function (err) {
                     if (err) {reject(err)}
-                    const imgURLS = []
+                    const imgURLS = [string]
+                    
                     for (let i = 0; i < req.files.length; i++) {
-                        const IMGURL = { URL: req.files[i].path }
-                        imgURLS.push(IMGURL)
+
+                        
+                        // const IMGURL = { URL: req.files[i].path }
+                        // console.log('req.files[i].path', req.files[i].path)
+                        imgURLS.push(req.files[i].path)
                     }
+                    console.log('imgURLS', imgURLS)
                     resolve(imgURLS)
                 });
             } catch (err) {
