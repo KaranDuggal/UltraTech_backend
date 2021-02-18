@@ -7,9 +7,13 @@ const validatorService = new ValidatorService()
 module.exports = UserController = function () {
     this.add_product = async (req, res) => {
         try {
-            const validate = await validatorService.schemas.productSchema.validate(req.body)
-            if (validate.error) { throw { custom_err_message: "error in validatorService.schemas.signupSchema", error: validate.error.details } }
-            const addproduct = await productService.addProduct(validate.value);
+            console.log('start');
+            console.log('req.body', req.body)
+            // const validate = await validatorService.schemas.productSchema.validate(req.body)
+            // if (validate.error) { throw { custom_err_message: "error in validatorService.schemas.signupSchema", error: validate.error.details } }
+            const imagesURL = await productService.uploadImages(req,res)
+            req.body.images = imagesURL
+            const addproduct = await productService.addProduct(req.body);
             return res.status(200).json({ success: true, message: `product Add Successfully.`, data: addproduct});
         } catch (err) {
             if(err.code===11000){  err = "This email Allready Exist"}
