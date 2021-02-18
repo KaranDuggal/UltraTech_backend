@@ -2,20 +2,22 @@ const mongoose = require('mongoose')
 const productSchema = mongoose.Schema({
     product_name: {
         type:String,
+        enum: ["UltraTech Weather Plus Cement"],
         required: 'Product Name is required',
     },
     product_type: {
         type:String,
+        enum: ["Cement","Steel"],
         required: 'Product Type is required',
     },
     brand_name: {
         type:String,
+        enum: ["UltraTech"],
         required: 'Brand Name is required',
     },
     size: {
         type:Number,
         enum: [8, 10, 12, 16,20,25,32],
-        default: 8 
     },
     quantity: {
         type:Number,
