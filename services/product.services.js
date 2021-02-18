@@ -71,9 +71,11 @@ class ProductService {
                 var upload = multer({ storage: storage }).array('images');
                 upload(req, res, async function (err) {
                     if (err) {reject(err)}
-                    const imgURLS = [string]
-                    
+                    if(req.files===undefined){return resolve(false)}
+                    // console.log('req.files', req.files)
+                    const imgURLS = []
                     for (let i = 0; i < req.files.length; i++) {
+                    
 
                         
                         // const IMGURL = { URL: req.files[i].path }

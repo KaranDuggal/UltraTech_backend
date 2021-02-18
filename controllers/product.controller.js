@@ -8,16 +8,16 @@ module.exports = UserController = function () {
     this.add_product = async (req, res) => {
         try {
             console.log('start');
-            console.log('req.body', req.body)
-            // const validate = await validatorService.schemas.productSchema.validate(req.body)
-            // if (validate.error) { throw { custom_err_message: "error in validatorService.schemas.signupSchema", error: validate.error.details } }
             const imagesURL = await productService.uploadImages(req,res)
-            req.body.images = imagesURL
+            if(imagesURL===false){
+                throw{custom_err_message:'place upload Image'}
+            }
+            // console.log('req.body.images', req.body.images)
             const addproduct = await productService.addProduct(req.body);
             return res.status(200).json({ success: true, message: `product Add Successfully.`, data: addproduct});
         } catch (err) {
             if(err.code===11000){  err = "This email Allready Exist"}
-            return res.status(400).json({ success: false,/*  error: err, message: err.custom_err_message ? err.custom_err_message : "Could not Signup"  */});
+            return res.status(400).json({ success: false, error: err, message: err.custom_err_message ? err.custom_err_message : "Could not Signup" });
         }
     }
     this.get_all_product = async (req, res) => {
