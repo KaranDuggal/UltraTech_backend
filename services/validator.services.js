@@ -15,7 +15,7 @@ class ValidatorService {
             password: Joi.string(),//.pattern(new RegExp('^[a-zA-Z0-9]{8,30}$'))
         });
         this.schemas.loginSchema = Joi.object({
-            email: Joi.string().required(),
+            phonenumber: Joi.number().required(),
             password: Joi.string().required(),
         });
         this.schemas.productSchema = Joi.object({

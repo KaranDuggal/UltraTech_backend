@@ -14,6 +14,18 @@ class DBService {
             })
         })
     }
+    findOneByPhone(collection, phoneNo) {
+        return new Promise((resolve, reject) => {
+            collection.findOne(phoneNo).exec((err, data) => {
+                if (err) {
+                    console.log(err);
+                    reject(err)
+                } else {
+                    resolve(data)
+                }
+            })
+        })
+    }
     save(model) {
         return new Promise((resolve, reject) => {
             model.save((err, modelsaved) => {

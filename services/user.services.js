@@ -34,9 +34,10 @@ class UserController {
         })
     }
     check_phoneno_exist_send_Data(phoneNo) {
+        
         return new Promise(async (resolve, reject) => {
             try {
-                const phoneexist = await dbService.findOne(user, { phonenumber: phoneNo }).catch(err => {
+                const phoneexist = await dbService.findOneByPhone(user, { phonenumber: phoneNo }).catch(err => {
                     throw err
                 })
                 resolve((phoneexist && phoneexist !== null) ? phoneexist : false)
