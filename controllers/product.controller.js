@@ -8,6 +8,7 @@ module.exports = UserController = function () {
     this.add_product = async (req, res) => {
         try {
             console.log('start');
+            console.log('req.body', req.body)
             const imagesURL = await productService.uploadImages(req,res)
             if(imagesURL===false){
                 throw{custom_err_message:'place upload Image'}
