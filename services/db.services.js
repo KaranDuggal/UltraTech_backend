@@ -54,6 +54,19 @@ class DBService {
             resolve(update)
         })
     }
+    delete(collection, id) {
+        return new Promise((resolve, reject) => {
+            collection.findByIdAndDelete(mongoose.Types.ObjectId(id
+            )).exec((err, data) => {
+                if (err) {
+                    console.log(err);
+                    reject(err)
+                } else {
+                    resolve(data)
+                }
+            })
+        })
+    }
 }
 
 module.exports = DBService;

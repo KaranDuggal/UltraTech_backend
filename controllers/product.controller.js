@@ -43,6 +43,7 @@ module.exports = UserController = function () {
     }
     this.delete_product = async (req, res) => {
         try {
+            console.log('req.params.id', req.params.id)
             const deleteproduct = await productService.deleteProduct(req.params.id);
             return res.status(200).json({ success: true, message: `Delete product Successfully.`, data: deleteproduct});
         } catch (err) {

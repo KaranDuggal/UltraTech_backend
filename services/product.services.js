@@ -39,7 +39,7 @@ class ProductService {
     deleteProduct(id) {
         return new Promise(async (resolve, reject) => {
             try {
-                const deleteproducts = await dbService.deleteOne(product,id)
+                const deleteproducts = await dbService.delete(product,id)
                 resolve(deleteproducts)
             } catch (err) {
                 reject(err);
